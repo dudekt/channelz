@@ -1,0 +1,31 @@
+$primaryColor: #D80073;
+$primaryAltColor: darken($primaryColor, 8%);
+
+$secondaryColor: #F472D0;
+$secondaryAltColor: darken($secondaryColor, 8%);
+
+$defaultColor: #647687;
+$defaultAltColor: darken($defaultColor, 8%);
+
+$palette: (
+    mainColors: (
+        primary: $primaryColor,
+        primaryAlt: $primaryAltColor,
+        secondary: $secondaryColor,
+        secondaryAlt: $secondaryAltColor,
+        default: $defaultColor,
+        defaultAlt: $defaultAltColor,
+
+        primary-font: rgba(255, 255, 255, 1),
+        secondary-font: rgba(0, 0, 0, 1),
+    ),
+
+    floppy: (
+        background: #0050EF,
+    ),
+
+    defaultTheme: (
+        default: #ECF0F1,
+        defaultAlt: #7f8C8D,
+    ),
+);

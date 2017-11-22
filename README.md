@@ -1,6 +1,6 @@
-# Channel Z
+# Amber
 
 ## Try it out
 ```
-npm run dev
+yarn run dev
 ```

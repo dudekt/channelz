@@ -1,0 +1,79 @@
+@function checkColor($type, $elem) {
+    @if map-get($palette, $type) {
+        $value: map-get(map-get($palette, $type), $elem);
+        @return $value;
+    }
+}
+
+@function powerNumber($number, $exp) {
+    $value: 1;
+    @if $exp > 0 {
+        @for $i from 1 through $exp {
+            $value: $value * $number;
+        }
+    }
+    @else if $exp < 0 {
+        @for $i from 1 through -$exp {
+            $value: $value / $number;
+        }
+    }
+    @return $value;
+}
+
+@function colorLuminance($color) {
+    $color-rgb: ("red": red($color), "green": green($color), "blue": blue($color));
+    @each $name, $value in $color-rgb {
+        $adjusted: 0;
+        $value: $value / 255;
+        @if $value < 0.03928 {
+            $value: $value / 12.92;
+        }
+        @else {
+            $value: ($value + 0.055) / 1.055;
+            $value: powerNumber($value, 2);
+        }
+        $color-rgb: map-merge($color-rgb, ($name: $value));
+    }
+    @return map-get($color-rgb, "red") * 0.2126 + map-get($color-rgb, "green") * 0.7152 + map-get($color-rgb, "blue") * 0.0722;
+}
+
+@function findColorInvert($color) {
+    @if colorLuminance($color) > 0.55 {
+        @return rgba(black, 0.8);
+    }
+    @else {
+        @return rgba(white, 1);
+    }
+}
+
+@function reduce($list, $callback, $initial: 0) {
+    $result: $initial;
+    @if length($list) > 0 {
+        @for $i from 1 through length($list) {
+            $result: call($callback, $result, nth($list, $i));
+        }
+    }
+    @return $result;
+}
+
+@function applyTransformation($value, $functionWithArgument){
+    @if length($functionWithArgument) == 1 {
+        @return call(nth($functionWithArgument, 1), $value);
+    } @elseif length($functionWithArgument) == 2 {
+        @return call(nth($functionWithArgument, 1), $value, nth($functionWithArgument, 2));
+    } @elseif length($functionWithArgument) == 3 {
+        @return call(nth($functionWithArgument, 1), $value, nth($functionWithArgument, 2), nth($functionWithArgument, 3));
+    } @elseif length($functionWithArgument) == 4 {
+        @return call(nth($functionWithArgument, 1), $value, nth($functionWithArgument, 2), nth($functionWithArgument, 3), nth($functionWithArgument, 4));
+    }
+}
+
+@function applyTransformations($value, $transformations){
+    @if length($transformations) > 0 {
+        @if type-of(nth($transformations,1)) == string {
+            @return applyTransformation($value, $transformations)
+        }
+        @return reduce($transformations, applyTransformation, $value);
+    }
+    @return $value;
+}

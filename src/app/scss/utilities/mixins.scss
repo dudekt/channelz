@@ -1,0 +1,79 @@
+@import "palette";
+
+@mixin position(
+    $position,
+    $bottom: null,
+    $left: null,
+    $right: null,
+    $top: null
+) {
+    position: $position;
+    bottom: $bottom;
+    left: $left;
+    right: $right;
+    top: $top;
+}
+
+@mixin checkLuminance($color) {
+    &:hover {
+        &:before {
+            color: findColorInvert($color);
+            content: "#{colorLuminance($color)}";
+            display: block;
+            font-size: 10px;
+            left: 0;
+            margin: 0 auto;
+            padding: 2px;
+            position: absolute;
+            right: 0;
+            top: -14px;
+            z-index: 100;
+            @include get-colors(background-color, mainColors, primary, transparentize 0.8);
+        }
+    }
+}
+
+@mixin get-colors($param, $type, $elem, $transformations: ()) {
+    $value: map-get(map-get($palette, $type), $elem);
+    @if $value {
+        & {
+            #{$param}: applyTransformations($value, $transformations);
+        }
+    }
+}
+
+@mixin loader(
+    $border-size: 2px,
+    $color: red,
+    $duration: 1s,
+    $size: 16px
+) {
+    @keyframes waiting {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    &:before {
+        animation: waiting $duration linear infinite reverse;
+        border-radius: 50%;
+        border-top: $border-size solid rgba($color, 1);
+        border-right: $border-size solid rgba($color, 1);
+        border-bottom: $border-size solid rgba($color, 0);
+        border-left: $border-size solid rgba($color, 0);
+        bottom: 0;
+        content: "";
+        height: $size;
+        left: 0;
+        margin: auto;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: $size;
+    }
+}
+
+// Responsiveness

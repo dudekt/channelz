@@ -1,0 +1,106 @@
+{
+    "root": true,
+
+    "parser": "babel-eslint",
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "amd": true
+    },
+    // Custom Globals
+    "globals": {
+        "__": true,
+        "$Keys": true,
+        "$Diff": true,
+        "Class": true
+    },
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true,
+            "modules": true,
+            "classes": true
+        }
+    },
+    "plugins": [
+        "import",
+        "react",
+        "no-not-accumulator-reassign",
+        "flowtype"
+    ],
+    "settings": {
+        "flowtype": {
+            "onlyFilesWithFlowAnnotation": true,
+            "define-flow-type": true
+        }
+    },
+    "extends": [
+        "airbnb",
+        "plugin:react/recommended"
+    ],
+    "rules": {
+        "func-names": ["error", "never"],
+        "no-console": 0,
+        "prefer-const": 0,
+        "semi": [1, "never"],
+        "global-require": 0,
+        "object-shorthand": ["error", "never"],
+        "no-duplicate-imports": 0,
+        "import/extensions": 0,
+        "import/no-dynamic-require": 0,
+        "import/no-unresolved": 0,
+        "import/no-extraneous-dependencies": 0,
+        "import/no-mutable-exports": 0,
+        "import/imports-first": 0,
+        "import/first": 0,
+        "import/prefer-default-export": 0,
+        "flowtype/define-flow-type": 2,
+        "react/react-in-jsx-scope": 2,
+        "new-cap": ["error", {
+            "newIsCap": true,
+            "capIsNew": false
+        }],
+        "indent": ["error", 4, {
+            "SwitchCase": 1
+        }],
+        "arrow-parens": 0,
+        "jsx-a11y/no-static-element-interactions": 0,
+        "jsx-a11y/label-has-for": 0,
+        "react/no-unused-prop-types": 0,
+        "react/jsx-wrap-multilines": 0,
+        "react/jsx-indent-props": [2, 4],
+        "react/jsx-indent": [2, 4],
+        "react/sort-comp": 0,
+        "react/prefer-stateless-function": 1,
+        "react/require-default-props": 0,
+        "react/no-find-dom-node": 1,
+        "guard-for-in": 1,
+        "dot-notation": 0,
+        "react/forbid-prop-types": 1,
+        "no-trailing-spaces": 0,
+        "no-underscore-dangle": 0,
+        "no-nested-ternary": 0,
+        "no-use-before-define": 1,
+        "no-not-accumulator-reassign/no-not-accumulator-reassign": [2, ["reduce"], {"props": true}],
+        "no-param-reassign": 0,
+        "no-restricted-syntax": [ 2,
+              "BreakStatement",
+              "DebuggerStatement",
+              "LabeledStatement",
+              "WithStatement"
+        ],
+        "max-len": [1, 120, {
+            "ignoreComments": true,
+            "ignoreTrailingComments": true,
+            "ignoreUrls": true,
+            "ignoreStrings": true,
+            "ignoreTemplateLiterals": true
+        }],
+        "comma-dangle": ["error", {
+            "arrays": "always-multiline",
+            "objects": "always-multiline",
+            "imports": "always-multiline",
+            "exports": "always-multiline",
+            "functions": "ignore"
+        }]
+    }
+}

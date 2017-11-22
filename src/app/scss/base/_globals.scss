@@ -1,0 +1,23 @@
+body {
+    align-content: stretch;
+    align-items: flex-start;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    height: 100vh;
+    justify-content: flex-start;
+    margin: 0 auto;
+    width: 100vw;
+
+    :global(#root) {
+        flex: 1 0 auto;
+    }
+}
+
+p {
+    margin: 0;
+}
+
+button {
+    outline: none;
+}
